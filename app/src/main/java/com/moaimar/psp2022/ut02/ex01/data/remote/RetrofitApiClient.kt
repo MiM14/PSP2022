@@ -1,6 +1,6 @@
-package com.moaimar.psp2022.ut02.data.remote
+package com.moaimar.psp2022.ut02.ex01.data.remote
 
-import com.moaimar.psp2022.ut02.data.remote.models.UserApiModel
+import com.moaimar.psp2022.ut02.ex01.data.remote.models.UserApiModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -22,20 +22,32 @@ class RetrofitApiClient {
             .build()
     }
 
-    private fun buildApiEndPoint() :ApiEndPoint {
-        return buildClient().create(apiEndPoint::class.java)
+    private fun buildApiEndPoint() : ApiEndPoint {
+        return buildClient().create(ApiEndPoint::class.java)
     }
 
-    fun getUsers():List<UserApiModel>{
+    fun getUser(userId: Int): UserApiModel?{
+        val callUser = apiEndPoint.getUser(userId)
+        val response = callUser.execute()
+        return if(response.isSuccessful){
+            response.body()
+        }else{
+            null
+        }
+    }
+
+    fun getUsers(): List<UserApiModel>? {
         val callUsers = apiEndPoint.getUsers()
         val response = callUsers.execute()
 
         return if(response.isSuccessful){
-            val users = response.body()
-            users ?: emptyList()
+            response.body()
         }else{
-            emptyList<UserApiModel>()
+            emptyList()
         }
+
+
+
         /*Otra manera
         if(response.isSuccessful){
             val users = response.body()
