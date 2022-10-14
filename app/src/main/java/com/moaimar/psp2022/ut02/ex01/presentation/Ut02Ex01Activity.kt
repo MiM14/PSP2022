@@ -6,7 +6,7 @@ import android.util.Log
 import com.moaimar.psp2022.R
 import com.moaimar.psp2022.ut02.ex01.data.remote.RetrofitApiClient
 
-class MainActivity : AppCompatActivity() {
+class Ut01Ex01Activity : AppCompatActivity() {
 
     val apiClient= RetrofitApiClient()
 

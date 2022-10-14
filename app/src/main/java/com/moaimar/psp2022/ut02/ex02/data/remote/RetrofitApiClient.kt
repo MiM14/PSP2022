@@ -1,7 +1,7 @@
 package com.moaimar.psp2022.ut02.ex02.data.remote
 
 import com.moaimar.psp2022.ut02.ex02.data.remote.models.ResponseApiModel
-import com.moaimar.psp2022.ut02.ex02.data.remote.models.AlertApiModel
+import com.moaimar.psp2022.ut02.ex02.data.remote.models.ResponseDetailApiModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,7 +25,7 @@ class RetrofitApiClient {
         return buildClient().create(ApiEndPoints::class.java)
     }
 
-    fun getAlertById(alert_id: Int): AlertApiModel? {
+    fun getAlertById(alert_id: Int): ResponseDetailApiModel? {
         val callUser = apiEndPoints.getAlertById(alert_id)
         val response = callUser.execute()
         return if(response.isSuccessful){
@@ -35,9 +35,10 @@ class RetrofitApiClient {
         }
     }
 
-    fun getResponse(): ResponseApiModel ?{
-        val callUsers = apiEndPoints.getResponse()
-        val response = callUsers.execute()
+    fun getAlerts(): ResponseApiModel? {
+
+        val callAlerts = apiEndPoints.getResponse()
+        val response = callAlerts.execute()
 
         return if(response.isSuccessful){
             response.body()
